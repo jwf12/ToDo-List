@@ -38,6 +38,7 @@
     </div>
 
     <!-- Modal -->
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -45,13 +46,33 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-journal-bookmark"></i> Nueva Tarea:</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <p>Titulo:</p>
-          <input type="text">
-        </div>
+        
+
+        <form action="{% url 'todo:create' %}" method = 'POST'>
+            {% csrf_token %}
+            <div class="modal-body">
+                
+                <div class="form-group m-3">
+                    <label for="titulo">Título:</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+                </div>
+                <div class="form-group m-3">
+                    <label for="descripcion">Descripcion:</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+                </div>
+                <div class="form-group m-3">
+                    <label for="fecha_limite">Fecha limite:</label>
+                    <input type="date" class="form-control" id="fecha_limite" name="fecha_limite">
+                </div>
+                    
+            </div>
+
+        </form>
+
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Guardar tarea</button>
+          <button type="submit" class="btn btn-primary">Guardar tarea</button>
         </div>
       </div>
     </div>
