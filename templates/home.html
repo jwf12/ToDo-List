@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1 class='text-center m-4'>Mis ToDo's</h1>
+    <div class="button-container text-center">
+        
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Crear Tarea  <i class="bi bi-pencil"></i>
+        </button>
+        
+    </div>
+
+  </button>
+
+    <div class="row ">
+
+        <div class="col ">
+            {% for tarea in tareas %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    
+                    <h5 class="card-title">{{tarea.titulo}} <i class="bi bi-card-checklist"></i></h5>
+                    <p class="card-text">{{tarea.descripcion}}</p>
+                    <div class="fecha d-flex ">
+                        <p class=''>Inicio: {{tarea.fecha_inicio}}</p>
+                        <p>Limite: {{tarea.fecha_limite}}</p>
+                    </div>
+                        
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-journal-bookmark"></i> Nueva Tarea:</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Titulo:</p>
+          <input type="text">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar tarea</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+</div>
+
+{% comment %} Modal {% endcomment %}
+
+
+
+{% endblock content %}

@@ -1,0 +1,8 @@
+Funcionalidades:
+
+-Crear una cuenta.
+-Iniciar sesion.
+-Visualizacion de tareas.
+-Crear actividad.
+-Modificarla.
+-Eliminarla.
