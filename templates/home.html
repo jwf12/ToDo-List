@@ -43,6 +43,12 @@
                             <button type='button' class='btn btn-danger mx-4' data-bs-toggle="modal" data-bs-target="#confirmModal_{{tarea.id}}">Eliminar</button>
                         </form>
 
+                        <div class="status-status">
+                            {% if tarea.status == 'Pendiente' %}
+                                <p>Status: Pendiente</p>
+                            {% endif %}
+                        </div>
+                        
                     </div>
                 </div>
             {% endfor %}
@@ -78,6 +84,11 @@
                     <input type="date" class="form-control" id="fecha_limite" name="fecha_limite">
                 </div>
                 
+                <div class="form-group m-3">
+                    <input type="radio" id="status" name="fav_language" value="status">
+                    <label for="status">Pendiente</label><br>
+
+                </div>
                     
             </div>
 
@@ -136,11 +147,11 @@
                 
                 <div class="form-group m-3">
                     <label for="titulo">Título:</label>
-                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder='{{tarea.titulo}}'>
+                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder='{{tarea.titulo}}... (Completar todos los campos)'>
                 </div>
                 <div class="form-group m-3">
                     <label for="descripcion">Descripcion:</label>
-                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder='{{tarea.descripcion}}'></textarea>
+                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder='{{tarea.descripcion}}... (Completar todos los campos)'></textarea>
                 </div>
                 <div class="form-group m-3">
                     <label for="fecha_limite">Fecha limite:</label>
