@@ -8,6 +8,7 @@ class TareasAdmin(admin.ModelAdmin):
                     'descripcion',
                     'fecha_inicio',
                     'fecha_limite',
+                    'color',
                     'status',
                     )
 

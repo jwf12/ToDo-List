@@ -1,9 +1,9 @@
-from django.forms import ModelForm
-from .models import Tareas
 from django import forms
+from .models import Tareas
 
 
-class TareasForm(ModelForm):
+
+class TareasForm(forms.ModelForm):
    
     class Meta:
         model = Tareas
@@ -11,4 +11,5 @@ class TareasForm(ModelForm):
             'titulo',
             'descripcion',
             'fecha_limite',
+
         ]

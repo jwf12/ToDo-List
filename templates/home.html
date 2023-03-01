@@ -16,11 +16,11 @@
 
   </button>
 
-    <div class="row ">
+    <div class="row m-4">
 
-        <div class="col ">
+        <div class="col d-flex">
             {% for tarea in tareas %}
-            <div class="card" style="width: 18rem;">
+            <div class="card m-4" style="width: 18rem;">
                 <div class="card-body">
                     
                     <h5 class="card-title">{{tarea.titulo}} <i class="bi bi-card-checklist"></i></h5>
@@ -31,14 +31,27 @@
                     </div>
                         
                     </div>
+                    <div class="card-footer d-flex justify-content-center">
+
+                        <form action="" method='POST'>
+                            {% csrf_token %}
+                            <button type='button' class='btn btn-primary mx-4' data-bs-toggle="modal" data-bs-target="#updateModal_{{tarea.id}}">Editar</button>
+                        </form>
+
+                        <form action="{% url 'todo:delete' tarea.id %}" method='POST' id='delete_form_{{tarea.id}}'>
+                            {% csrf_token %}
+                            <button type='button' class='btn btn-danger mx-4' data-bs-toggle="modal" data-bs-target="#confirmModal_{{tarea.id}}">Eliminar</button>
+                        </form>
+
+                    </div>
                 </div>
             {% endfor %}
         </div>
 
     </div>
 
-    <!-- Modal -->
-
+<!-- Modal: crear tarea-->
+ 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -47,8 +60,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         
-
-        <form action="{% url 'todo:create' %}" method = 'POST'>
+    
+        <form action="{% url 'todo:taskcreate' %}" method = 'POST'>
             {% csrf_token %}
             <div class="modal-body">
                 
@@ -64,24 +77,91 @@
                     <label for="fecha_limite">Fecha limite:</label>
                     <input type="date" class="form-control" id="fecha_limite" name="fecha_limite">
                 </div>
+                
                     
+            </div>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Guardar tarea</button>
             </div>
 
         </form>
 
         
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Guardar tarea</button>
-        </div>
       </div>
     </div>
 </div>
 
+<!-- Modal: crear Eliminar-->
+
+{% for tarea in tareas %}
+<div class="modal fade" id="confirmModal_{{tarea.id}}" tabindex="-1" aria-labelledby="confirmModalLabel_{{tarea.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel_{{tarea.id}}">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de que desea eliminar esta tarea?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="document.getElementById('delete_form_{{tarea.id}}').submit();">Eliminar</button>
+            </div>
+        </div>
+    </div>
 </div>
+{% endfor %}
 
-{% comment %} Modal {% endcomment %}
 
+<!-- Modal: editar tarea-->
+
+{% for tarea in tareas %}
+ 
+<div class="modal fade" id="updateModal_{{tarea.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{tarea.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-journal-bookmark"></i> Editar Tarea:</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+    
+        <form action="{% url 'todo:update' tarea.id %}" method = 'POST'>
+            {% csrf_token %}
+            <div class="modal-body">
+                
+                <div class="form-group m-3">
+                    <label for="titulo">Título:</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder='{{tarea.titulo}}'>
+                </div>
+                <div class="form-group m-3">
+                    <label for="descripcion">Descripcion:</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder='{{tarea.descripcion}}'></textarea>
+                </div>
+                <div class="form-group m-3">
+                    <label for="fecha_limite">Fecha limite:</label>
+                    <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" placeholder='{{tarea.fecha_limite}}'>
+                </div>
+                    
+            </div>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Guardar tarea</button>
+            </div>
+
+        </form>
+
+        
+      </div>
+    </div>
+</div>
+{% endfor %}
 
 
 {% endblock content %}
