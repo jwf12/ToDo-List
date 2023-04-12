@@ -8,7 +8,7 @@
     <div class="button-container text-center">
         
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary text-center mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Crear Tarea  <i class="bi bi-pencil"></i>
         </button>
         
@@ -16,41 +16,35 @@
 
   </button>
 
-    <div class="row m-4">
-
-        <div class="col d-flex">
+        <div class="row">
             {% for tarea in tareas %}
-            <div class="card m-4" style="width: 18rem;">
-                <div class="card-body">
-                    
-                    <h5 class="card-title">{{tarea.titulo}} <i class="bi bi-card-checklist"></i></h5>
-                    <p class="card-text">{{tarea.descripcion}}</p>
-                    <div class="fecha d-flex ">
-                        <p class=''>Inicio: {{tarea.fecha_inicio}}</p>
-                        <p>Limite: {{tarea.fecha_limite}}</p>
-                    </div>
-                        
+            <div class="col-lg-4 col-md-12 d-flex justify-content-center">
+                <div class="card m-4 text-center" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{tarea.titulo}} <i class="bi bi-card-checklist"></i></h5>
+                        <p class="card-text">{{tarea.descripcion}}</p>
+                        <div class="fecha d-flex ">
+                            <p class=''>Inicio: {{tarea.fecha_inicio}}</p>
+                            <p>Limite: {{tarea.fecha_limite}}</p>
+                        </div>
                     </div>
                     <div class="card-footer d-flex justify-content-center">
-
                         <form action="" method='POST'>
                             {% csrf_token %}
                             <button type='button' class='btn btn-primary mx-4' data-bs-toggle="modal" data-bs-target="#updateModal_{{tarea.id}}">Editar</button>
                         </form>
-
                         <form action="{% url 'todo:delete' tarea.id %}" method='POST' id='delete_form_{{tarea.id}}'>
                             {% csrf_token %}
                             <button type='button' class='btn btn-danger mx-4' data-bs-toggle="modal" data-bs-target="#confirmModal_{{tarea.id}}">Eliminar</button>
                         </form>
-
                         <div class="status-status">
                             {% if tarea.status == 'Pendiente' %}
                                 <p>Status: Pendiente</p>
                             {% endif %}
                         </div>
-                        
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
 

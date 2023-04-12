@@ -24,6 +24,7 @@
               <li class="nav-item">
                 <a class="nav-link active text-white" aria-current="page" href="{% url 'todo:home' %}">Home</a>
               </li>
+              
             </ul>
             <ul class="navbar-nav ms-auto">
               <div class='text-end d-flex'>
@@ -33,10 +34,10 @@
                   {%endif%}
                 </div>
 
-                <li class="nav-item ">
-                <a class="nav-link text-white " href="{% url 'todo:logout' %}">Logout</a>
-              </li>
               </div>
+              <li class="nav-item ">
+              <a class="nav-link text-white " href="{% url 'todo:logout' %}">Logout</a>
+            </li>
             </ul>
 
           </div>
