@@ -19,11 +19,11 @@ import os
 # env_path = os.path.join(os.path.dirname(__file__), '.env')
 
 
-import environ
+# import environ
 
-env = environ.Env()
+# env = environ.Env()
 
-environ.Env.read_env()
+# environ.Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,9 +37,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--n7ibx9i1%f=yhv*9bi!_y^+#9*9kgojxu#h+*iackpf+w9%fq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -98,12 +98,19 @@ WSGI_APPLICATION = 'app.wsgi.application'
 #     }
 # }
 
-import dj_database_url
+# import dj_database_url
+
+# DATABASES = {
+
+#     'default': dj_database_url.parse(env('DATABASE_URL'))
+
+# }
 
 DATABASES = {
-
-    'default': dj_database_url.parse(env('DATABASE_URL'))
-
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
